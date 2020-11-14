@@ -13,7 +13,7 @@ namespace EmployeePayrollServicesADO.NET_Day26
         public string departmentName { get; set; }
         public int departmentID { get; set; }
         public string grade { get; set; }
-        //public char Gender { get; set; }
+        public string gender { get; set; }
         public double basicPay { get; set; }
         public double taxablePay { get; set; }
         //public double Deductions { get; set; }
