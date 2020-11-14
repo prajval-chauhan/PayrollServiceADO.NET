@@ -16,7 +16,8 @@ namespace EmployeePayrollADO.NET_Day26
             //call.GetAllEmployee();
             //call.UpdatingEmployeeRecords();
             //call.UpdatingDetailsUsingStoredProcedure(model);
-            call.RetrievingEmployeesInACertainDateRange();
+            //call.RetrievingEmployeesInACertainDateRange();
+            call.PerformMathematicalOperations();
         }
     }
 }

@@ -187,5 +187,27 @@ namespace EmployeePayrollADO.NET_Day26
                 this.connection.Close();
             }
         }
+        /// <summary>
+        /// UC6: Performs the mathematical operations like finding the sum, avg of the salary and group them by gender
+        /// </summary>
+        public void PerformMathematicalOperations()
+        {
+            connection.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "select gender, sum(pr.basicPay), avg(pr.basicPay) as 'Sum of Salary' from empPayroll pr, employee_details where pr.grade = employee_details.grade group by employee_details.gender; ";
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    Console.WriteLine("Sum of the wages of the {0} employees is: {1}", reader[0], reader[1]);
+                    Console.WriteLine("Average salary of {0} employees is: {1}", reader[0], reader[2]);
+                }
+                else
+                    break;
+            }
+            reader.Close();
+        }
     }
 }
