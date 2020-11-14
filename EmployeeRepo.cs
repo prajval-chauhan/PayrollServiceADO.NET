@@ -108,5 +108,33 @@ namespace EmployeePayrollADO.NET_Day26
                 this.connection.Close();
             }
         }
+        public bool UpdatingDetailsUsingStoredProcedure(EmployeeModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand cmd = new SqlCommand("UpdateEmployeeSalaryDetails", this.connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@empID", model.empID);
+                    cmd.Parameters.AddWithValue("@grade", model.grade);
+                    this.connection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    this.connection.Close();
+                    GetAllEmployee();
+                    if (result != 0)
+                        return true;
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }
