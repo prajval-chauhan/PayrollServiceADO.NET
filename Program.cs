@@ -8,7 +8,8 @@ namespace EmployeePayrollADO.NET_Day26
         {
             EmployeeRepo call = new EmployeeRepo();
             Console.WriteLine("Welcome to the payroll service");
-            call.CheckConnection();
+            //call.CheckConnection();
+            call.GetAllEmployee();
         }
     }
 }
