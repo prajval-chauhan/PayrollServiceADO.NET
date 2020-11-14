@@ -108,6 +108,12 @@ namespace EmployeePayrollADO.NET_Day26
                 this.connection.Close();
             }
         }
+        /// <summary>
+        /// UC4: Updatings the details using stored procedure.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool UpdatingDetailsUsingStoredProcedure(EmployeeModel model)
         {
             try
@@ -125,6 +131,51 @@ namespace EmployeePayrollADO.NET_Day26
                     if (result != 0)
                         return true;
                     return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
+        /// <summary>
+        /// UC5: Retrieving employees from a certain date range
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        public void RetrievingEmployeesInACertainDateRange()
+        {
+            EmployeeModel employeemodel = new EmployeeModel();
+            try
+            {
+                using (this.connection)
+                {
+                    string query = @"select * from employee_details where start_date between cast('2018-01-01' as date) and cast('2018-12-12' as date);";
+                    SqlCommand cmd = new SqlCommand(query, this.connection);
+                    this.connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            employeemodel.empID = dr.GetInt32(0);
+                            employeemodel.name = dr.GetString(1);
+                            employeemodel.departmentID = dr.GetInt32(2);
+                            employeemodel.grade = dr.GetString(3);
+                            employeemodel.CompanyName = dr.GetString(4);
+                            employeemodel.gender = dr.GetString(5);
+                            employeemodel.start_date = dr.GetDateTime(6);
+                            Console.WriteLine("empID: {0},\tname: {1},\tdepartmentID: {2},\tSalary grade: {3},\tCompany: {4},\tgender: {5},\tstart_date: {6}",
+                                employeemodel.empID, employeemodel.name, employeemodel.departmentID, employeemodel.grade, employeemodel.CompanyName, employeemodel.gender,employeemodel.start_date);
+                        }
+                    }
+                    else
+                        Console.WriteLine("No data found");
+                    dr.Close();
+                    this.connection.Close();
                 }
             }
             catch (Exception e)

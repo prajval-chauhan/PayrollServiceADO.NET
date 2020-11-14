@@ -19,7 +19,7 @@ namespace EmployeePayrollServicesADO.NET_Day26
         //public double Deductions { get; set; }
         public double incomeTax { get; set; }
         public double netPay { get; set; }
-        //public DateTime StartDate { get; set; }
+        public DateTime start_date { get; set; }
         public string CompanyName { get; set; }
         //public string Country { get; set; }
     }
