@@ -6,7 +6,9 @@ namespace EmployeePayrollADO.NET_Day26
     {
         static void Main(string[] args)
         {
+            EmployeeRepo call = new EmployeeRepo();
             Console.WriteLine("Welcome to the payroll service");
+            call.CheckConnection();
         }
     }
 }
