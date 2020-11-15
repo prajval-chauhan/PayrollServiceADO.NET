@@ -209,5 +209,40 @@ namespace EmployeePayrollADO.NET_Day26
             }
             reader.Close();
         }
+        /// <summary>
+        /// Uses a stored procedure to add employee to the employee_details table
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <exception cref="Exception"></exception>
+        public void AddEmployee(EmployeeModel model)
+        {
+            try
+            {
+                using(this.connection)
+                {
+                    SqlCommand cmd = new SqlCommand("spAddEmployee", this.connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@empID", model.empID);
+                    cmd.Parameters.AddWithValue("@name", model.name);
+                    cmd.Parameters.AddWithValue("@departmentID", model.departmentID);
+                    cmd.Parameters.AddWithValue("@grade", model.grade);
+                    cmd.Parameters.AddWithValue("@companyName", model.CompanyName);
+                    cmd.Parameters.AddWithValue("@gender", model.gender);
+                    cmd.Parameters.AddWithValue("@start_date", model.start_date);
+                    this.connection.Open();
+                    cmd.ExecuteNonQuery();
+                    this.connection.Close();
+                    GetAllEmployee();
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }

@@ -9,15 +9,21 @@ namespace EmployeePayrollADO.NET_Day26
         {
             EmployeeRepo call = new EmployeeRepo();
             EmployeeModel model = new EmployeeModel();
-            model.empID = 1;
-            model.grade = "A1";
+            model.grade = "A3";
+            model.name = "Naman";
+            model.departmentID = 333;
+            model.gender = "M";
+            model.CompanyName = "XYZ";
+            model.empID = 5;
+            model.start_date = Convert.ToDateTime("2020/11/20");
             Console.WriteLine("Welcome to the payroll service");
             //call.CheckConnection();
             //call.GetAllEmployee();
             //call.UpdatingEmployeeRecords();
             //call.UpdatingDetailsUsingStoredProcedure(model);
             //call.RetrievingEmployeesInACertainDateRange();
-            call.PerformMathematicalOperations();
+            //call.PerformMathematicalOperations();
+            call.AddEmployee(model);
         }
     }
 }
